@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Fetch</title>
+</head>
+<body>
+    <h1>Dados da API</h1>
+    <div id="resultado">Carregando...</div> 
+    
+    <script>
+        const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+
+        function fetchData() {
+            fetch(apiUrl)
+                .then(response => response.json()) // Converte a resposta para JSON
+                .then(data => {
+                   
+                    let output = '<ul>';
+                    data.forEach(post => {
+                        output += `<li><strong>${post.title}</strong>: ${post.body}</li>`;
+                    });
+                    output += '</ul>';
+                    document.getElementById('resultado').innerHTML = output;
+                })
+                .catch(error => {
+                    document.getElementById('resultado').innerHTML = 'Erro ao buscar dados.';
+                    console.error('Erro ao buscar dados:', error);
+                });
+        }
+
+        
+        fetchData();
+    </script>
+</body>
+</html>
